@@ -7,13 +7,12 @@ $break-medium: 1200px;
 $mobile-width: 768px;
 
 $bgcolor: rgb(249, 250, 251);
-//$basecolor: #2ecc71;
-//$darkbase: rgb(39, 174, 96);
-//$darkbase-hover: rgba(39, 174, 96, .6);
 $basecolor: #3498db;
 $darkbase: #2980b9;
 $darkbase-hover: #1b6596;
 $textcolor: #8198a3;
+
+$loading-bg: rgba(0,0,0,.8);
 
 .browsehappy {
   margin: 0.2em 0;
@@ -45,6 +44,34 @@ body {
   border-top-right-radius: 0 !important;
   border-top: 0 !important;
   margin-top: 0 !important;
+}
+
+.loading-cont {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: $loading-bg;
+  z-index: 9998;
+  text-align: center;
+  .loading {
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: inline-block;
+    background-color: $basecolor;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    margin: auto;
+    color: white;
+    font-size: 30px;
+    border-radius: 5px;
+    z-index: 9999;
+  }
 }
 
 // --- HEADER ---
