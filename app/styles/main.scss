@@ -1,16 +1,18 @@
 // bower:scss
 // endbower
 
-
 $bigmac: 1440px;
 $break-small: 1000px;
 $break-medium: 1200px;
 $mobile-width: 768px;
 
 $bgcolor: rgb(249, 250, 251);
-$basecolor: #2ecc71;
-$darkbase: rgb(39, 174, 96);
-$darkbase-hover: rgba(39, 174, 96, .6);
+//$basecolor: #2ecc71;
+//$darkbase: rgb(39, 174, 96);
+//$darkbase-hover: rgba(39, 174, 96, .6);
+$basecolor: #3498db;
+$darkbase: #2980b9;
+$darkbase-hover: #1b6596;
 $textcolor: #8198a3;
 
 .browsehappy {
@@ -89,10 +91,14 @@ body {
     margin-top: 7px;
     margin-right: 7px;
     font-size: 13px !important;
+    i { margin-right: 3px; }
   }
   .section-button:hover {
     cursor: pointer;
     background-color: $darkbase-hover;
+  }
+  .section-button.active {
+    background-color: $darkbase-hover !important;
   }
 }
 
