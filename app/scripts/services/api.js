@@ -32,5 +32,7 @@ angular.module('semavisApp').service('api', function ($rootScope, $http) {
     });
   };
 
+  // TODO: To suggest keywords, call -> /terms/similar_terms
+
   return api;
 });

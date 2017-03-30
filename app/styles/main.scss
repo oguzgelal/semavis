@@ -83,6 +83,7 @@ body {
   padding: 20px;
   color: white;
   border-radius: 5px;
+  overflow: hidden;
 
   .header-l1 {
     font-size: 30px;
@@ -90,6 +91,13 @@ body {
   }
   .header-l2 {
     font-weight: 100;
+  }
+  .effect {
+    position: absolute;
+    right: -20px;
+    top: -50px;
+    width: 182px;
+    transform: rotate(90deg);
   }
 }
 
