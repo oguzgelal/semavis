@@ -13,8 +13,7 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     $rootScope.loading = true;
     api.extractKeywords($scope.input.corpus).then(function (res) {
       var related = res.data.join(', ');
-      swal('Success!', 'Related keywords with your test are: ' + related, 'success');
-      console.log(res);
+      swal('Extracted keywords', related, 'success');
       $rootScope.loading = false;
     }, function () {
       swal('Oops...', 'Something went wrong!', 'error');

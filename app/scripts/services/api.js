@@ -2,7 +2,13 @@
 
 angular.module('semavisApp').service('api', function ($rootScope, $http) {
   var api = {
-    keys: ['933bb080-f919-11e6-b22d-93a4ae922ff1'],
+    keys: [
+      '933bb080-f919-11e6-b22d-93a4ae922ff1',
+      'de081440-149a-11e7-b22d-93a4ae922ff1',
+      'c746ce20-148d-11e7-b22d-93a4ae922ff1',
+      '7cda2ea0-148c-11e7-b22d-93a4ae922ff1',
+      '99196470-148a-11e7-b22d-93a4ae922ff1'
+    ],
     base: 'http://api.cortical.io/rest',
     getApiKey: function () {
       return api.keys[Math.floor(Math.random() * api.keys.length)];
@@ -27,5 +33,4 @@ angular.module('semavisApp').service('api', function ($rootScope, $http) {
   };
 
   return api;
-
 });
