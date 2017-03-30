@@ -8,6 +8,7 @@ $mobile-width: 768px;
 
 $bgcolor: rgb(249, 250, 251);
 $basecolor: #3498db;
+$transblue: rgba(52, 152, 219, .2);
 $darkbase: #2980b9;
 $darkbase-hover: #1b6596;
 $textcolor: #8198a3;
@@ -100,7 +101,6 @@ body {
   background-color: $basecolor;
   color: white;
   font-size: 14px;
-  margin-bottom: 15px;
   height: 40px;
 
   .section-text {
@@ -142,7 +142,7 @@ body {
     border: 1px solid lightgray;
     color: $textcolor;
     padding: 20px;
-    height: 400px !important;
+    height: 710px !important;
     overflow: scroll;
   }
   .text-edit-static {
@@ -156,9 +156,20 @@ body {
 
 
 .results-container {
-
   margin-top: 30px;
+}
 
+.mock-box {
+  width: 100%;
+  border-radius: 5px;
+  height: 200px;
+  background-color: lightgray;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.highlight {
+  background-color: $transblue;
 }
 
 
