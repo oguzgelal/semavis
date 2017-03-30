@@ -143,7 +143,7 @@ body {
     border: 1px solid lightgray;
     color: $textcolor;
     padding: 20px;
-    height: 966px !important;
+    height: 500px !important;
     overflow: scroll;
     @media screen and (max-width: $mobile-width) {
       height: 400px !important;
@@ -167,7 +167,7 @@ body {
 .mock-box {
   width: 100%;
   border-radius: 5px;
-  height: 200px;
+  height: 100px;
   background-color: lightgray;
   margin-top: 10px;
   margin-bottom: 15px;
@@ -177,6 +177,25 @@ body {
   background-color: $transblue;
 }
 
+.keyword-box {
+  background-color: white !important;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  ul {
+    min-height: 50px;
+    padding: 0;
+    list-style: none;
+    li {
+      padding: 10px 20px;
+      border-bottom: 1px solid whitesmoke;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+  }
+}
 
 
 
