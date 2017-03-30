@@ -5,33 +5,90 @@
     <div class="header-l2">Semantic Relevancy Visualisation</div>
   </div>
 
+  <!-- /// content /// -->
   <div class="col-sm-8 col-xs-12 pm0 pl0 content-container">
     <div class="section-header bb0">
       <div class="section-text">Text Content</div>
-      <div class="section-button" ng-click="analyze()"><i class="fa fa-cogs" aria-hidden="true"></i> Analyse</div>
-      <div class="section-button {{ textEditActive ? 'active' : '' }}" ng-click="toggleEdit(!textEditActive)">
-        <i class="fa fa-pencil" aria-hidden="true"></i> {{ textEditActive ? 'Editing' : 'Edit' }}
+      <!-- expand button -->
+      <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+      <!-- minimize button -->
+      <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+      <!-- close button -->
+      <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+      <!-- analyse button -->
+      <div class="section-button" ng-click="analyze()">
+        <i class="fa fa-cogs" aria-hidden="true"></i> Analyse
+      </div>
+      <!-- edit button -->
+      <div class="section-button {{ views['text'].edit ? 'active' : '' }}" ng-click="toggleEdit(!views['text'].edit)">
+        <i class="fa fa-pencil" aria-hidden="true"></i> {{ views['text'].edit ? 'Editing' : 'Edit' }}
       </div>
     </div>
-    <textarea class="text-edit bt0" ng-model="input.corpus" ng-if="textEditActive" placeholder="Enter your content..."></textarea>
-    <div class="text-edit text-edit-static text-edit-highlight bt0" ng-if="!textEditActive" ng-bind-html="input.corpusHtml"></div>
+    <textarea class="text-edit bt0" ng-model="input.corpus" ng-if="views['text'].edit" placeholder="Enter your content..."></textarea>
+    <div class="text-edit text-edit-static text-edit-highlight bt0" ng-if="!views['text'].edit" ng-bind-html="input.corpusHtml"></div>
   </div>
 
   <div class="col-sm-4 col-xs-12 pr0 results-container">
 
-    <div class="section-header bb0"><div class="section-text">Heatmap</div></div>
-    <div class="mock-box bt0"></div>
-
-    <div class="section-header bb0"><div class="section-text">Cluster Details</div></div>
-    <div class="mock-box bt0"></div>
-
-    <div class="section-header bb0"><div class="section-text">Keyword Suggestions</div></div>
-    <div class="keyword-box bt0">
-      <ul><li ng-repeat="key in output.relatedKeywords">{{ key }}</li></ul>
+    <!-- /// heatmap /// -->
+    <div class="section">
+      <div class="section-header bb0">
+        <div class="section-text">Heatmap</div>
+        <!-- expand button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+        <!-- minimize button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+        <!-- close button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+      </div>
+      <div class="mock-box bt0"></div>
     </div>
 
-    <div class="section-header bb0"><div class="section-text">Readability</div></div>
-    <div class="mock-box bt0"></div>
+    <!-- /// cluster details /// -->
+    <div class="section">
+      <div class="section-header bb0">
+        <div class="section-text">Cluster Details</div>
+        <!-- expand button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+        <!-- minimize button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+        <!-- close button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+      </div>
+      <div class="mock-box bt0"></div>
+    </div>
+
+    <!-- /// relevant keywords /// -->
+    <div class="section">
+      <div class="section-header bb0">
+        <div class="section-text">Relevant Keywords</div>
+        <!-- expand button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+        <!-- minimize button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+        <!-- close button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+      </div>
+      <div class="keyword-box bt0">
+        <ul>
+          <li ng-repeat="key in output.relatedKeywords">{{ key }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- /// readability /// -->
+    <div class="section">
+      <div class="section-header bb0">
+        <div class="section-text">Readability</div>
+        <!-- expand button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+        <!-- minimize button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-minus-square" aria-hidden="true"></i></div>
+        <!-- close button -->
+        <div class="section-button icon-only" ng-click="analyze()"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+      </div>
+      <div class="mock-box bt0"></div>
+    </div>
 
   </div>
 

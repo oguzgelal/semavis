@@ -79,11 +79,13 @@ body {
 
 .header-container {
   background-color: $basecolor;
-  margin-top: 30px;
   padding: 20px;
   color: white;
   border-radius: 5px;
   overflow: hidden;
+  margin-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 
   .header-l1 {
     font-size: 30px;
@@ -121,6 +123,7 @@ body {
     font-size: 13px !important;
     i { margin-right: 3px; }
   }
+  .section-button.icon-only { i { margin-right: 0px !important; } }
   .section-button:hover {
     cursor: pointer;
     background-color: $darkbase-hover;
