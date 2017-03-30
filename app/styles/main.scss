@@ -132,7 +132,7 @@ body {
 
 .content-container {
 
-  margin-top: 30px;
+  margin-top: 15px;
 
   .text-edit {
     outline: none !important;
@@ -145,6 +145,9 @@ body {
     padding: 20px;
     height: 966px !important;
     overflow: scroll;
+    @media screen and (max-width: $mobile-width) {
+      height: 400px !important;
+    }
   }
   .text-edit-static {
     white-space: pre-wrap;
@@ -157,7 +160,8 @@ body {
 
 
 .results-container {
-  margin-top: 30px;
+  margin-top: 15px;
+  padding: 0;
 }
 
 .mock-box {
