@@ -9,12 +9,12 @@
     <div class="section-header bb0">
       <div class="section-text">Text Content</div>
       <div class="section-button" ng-click="analyze()"><i class="fa fa-cogs" aria-hidden="true"></i> Analyse</div>
-      <div class="section-button {{ textEditActive ? 'active' : '' }}" ng-click="textEditActive = !textEditActive">
+      <div class="section-button {{ textEditActive ? 'active' : '' }}" ng-click="toggleEdit(!textEditActive)">
         <i class="fa fa-pencil" aria-hidden="true"></i> {{ textEditActive ? 'Editing' : 'Edit' }}
       </div>
     </div>
     <textarea class="text-edit bt0" ng-model="input.corpus" ng-if="textEditActive" placeholder="Enter your content..."></textarea>
-    <div class="text-edit text-edit-static text-edit-highlight bt0" ng-if="!textEditActive" ng-bind-html="input.corpus"></div>
+    <div class="text-edit text-edit-static text-edit-highlight bt0" ng-if="!textEditActive" ng-bind-html="input.corpusHtml"></div>
   </div>
 
   <div class="col-sm-4 col-xs-12 pr0 results-container">

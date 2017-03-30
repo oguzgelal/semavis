@@ -5,7 +5,8 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   $scope.textEditActive = true;
 
   $scope.input = {
-    corpus: ''
+    corpus: '',
+    corpusHtml: ''
   };
 
   $scope.output = {
@@ -13,8 +14,17 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     relatedKeywordsHighlightRegex: null
   };
 
+  $scope.toggleEdit = function (editOn) {
+    if (editOn) { $scope.input.corpusHtml = ''; }
+    else {
+      $scope.input.corpusHtml = $scope.input.corpus;
+      $scope.highlightRegex();
+    }
+    $scope.textEditActive = editOn;
+  };
+
   $scope.analyze = function () {
-    $scope.textEditActive = false;
+    $scope.toggleEdit(false);
     $rootScope.loading = true;
     api.extractKeywords($scope.input.corpus).then(function (res) {
       $scope.output.relatedKeywords = res.data;
@@ -31,7 +41,7 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   $scope.highlightRegex = function () {
     var regKeys = $scope.output.relatedKeywords.join('|');
     $scope.output.relatedKeywordsHighlightRegex = new RegExp('\\b(?:' + regKeys + ')\\b', 'gi');
-    $scope.input.corpus = $scope.input.corpus.replace($scope.output.relatedKeywordsHighlightRegex, function (txt) {
+    $scope.input.corpusHtml = $scope.input.corpus.replace($scope.output.relatedKeywordsHighlightRegex, function (txt) {
       return '<span class="highlight">' + txt + '</span>';
     });
   };
