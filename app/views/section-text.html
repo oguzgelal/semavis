@@ -6,9 +6,9 @@
     <!-- close button -->
     <div class="section-button icon-only" data-toggle="tooltip" title="Close" ng-click="openCloseView('text')"><i class="fa fa-times" aria-hidden="true"></i></div>
     <!-- maximize button -->
-    <div class="section-button icon-only {{ isMaximized('text') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('text') ? 'Cancel maximize' : 'Maximize' }}" ng-click="maximizeView('text')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMaximized('text') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('text') ? 'Shrink' : 'Maximize' }}" ng-click="maximizeView('text')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
     <!-- minimize button -->
-    <div class="section-button icon-only {{ isMinimized('text') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('text') ? 'Cancel maximize' : 'Minimize' }}" ng-click="minimizeView('text')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMinimized('text') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMinimized('text') ? 'Expand' : 'Minimize' }}" ng-click="minimizeView('text')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
     <!-- analyse button -->
     <div class="section-button" ng-click="analyze()">
       <i class="fa fa-cogs" aria-hidden="true"></i> Analyse

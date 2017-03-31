@@ -6,9 +6,9 @@
     <!-- close button -->
     <div class="section-button icon-only" data-toggle="tooltip" title="Close" ng-click="openCloseView('relevant')"><i class="fa fa-times" aria-hidden="true"></i></div>
     <!-- maximize button -->
-    <div class="section-button icon-only {{ isMaximized('relevant') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('relevant') ? 'Cancel maximize' : 'Maximize' }}" ng-click="maximizeView('relevant')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMaximized('relevant') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('relevant') ? 'Shrink' : 'Maximize' }}" ng-click="maximizeView('relevant')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
     <!-- minimize button -->
-    <div class="section-button icon-only {{ isMinimized('relevant') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('relevant') ? 'Cancel maximize' : 'Minimize' }}" ng-click="minimizeView('relevant')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMinimized('relevant') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMinimized('relevant') ? 'Expand' : 'Minimize' }}" ng-click="minimizeView('relevant')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
   </div>
   <div class="keyword-box bt0" ng-if="!isMinimized('relevant')">
     <ul>
