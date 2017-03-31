@@ -9,9 +9,10 @@
   "node": true,
   "strict": true,
   "undef": true,
-  "unused": true,
+  "unused": false,
   "globals": {
     "angular": false,
-    "swal": false
+    "swal": false,
+    "dragula": false
   }
 }

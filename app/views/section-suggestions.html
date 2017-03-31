@@ -1,6 +1,8 @@
 <div class="section">
-  <div class="section-header {{ isMinimized('suggestions') ? '' : 'bb0' }}">
-    <div class="section-text">Suggested Keywords</div>
+  <div class="section-header clearfix {{ isMinimized('suggestions') ? '' : 'bb0' }}">
+    <div class="section-text">
+      <i class="fa fa-th drag-handle" aria-hidden="true"></i> Suggested Keywords
+    </div>
     <!-- close button -->
     <div class="section-button icon-only" ng-click="closeView('suggestions')"><i class="fa fa-times" aria-hidden="true"></i></div>
     <!-- maximize button -->

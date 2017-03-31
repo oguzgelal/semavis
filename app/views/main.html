@@ -8,20 +8,20 @@
 
     <ng-include src="'views/scale.html'"></ng-include>
 
-    <div class="col-sm-{{ columnLocation }} col-xs-12 pm0 pl0 content-container" ng-if="colHidden!=='left'">
+    <div class="col-sm-{{ columnLocation }} col-xs-12 pm0 pl0 {{ columnLocation===12 ? 'pr0' : '' }} content-container {{ columnLocation===0 ? 'hidden' : '' }}" id="col-left">
       <!-- /// text /// -->
-      <ng-include src="'views/section-text.html'"></ng-include>
+      <div><ng-include src="'views/section-text.html'"></ng-include></div>
     </div>
 
-    <div class="col-sm-{{ (12 - columnLocation) }} col-xs-12 pr0 results-container" ng-if="colHidden!=='right'">
+    <div class="col-sm-{{ (12 - columnLocation) }} col-xs-12 pr0 {{ columnLocation===0 ? 'pl0' : '' }} results-container {{ columnLocation===12 ? 'hidden' : '' }}" id="col-right">
       <!-- /// heatmap /// -->
-      <ng-include src="'views/section-heatmap.html'"></ng-include>
+      <div><ng-include class="movable" src="'views/section-heatmap.html'"></ng-include></div>
       <!-- /// readability /// -->
-      <ng-include src="'views/section-readability.html'"></ng-include>
+      <div><ng-include src="'views/section-readability.html'"></ng-include></div>
       <!-- /// suggested keywords /// -->
-      <ng-include src="'views/section-suggestions.html'"></ng-include>
+      <div><ng-include src="'views/section-suggestions.html'"></ng-include></div>
       <!-- /// relevant keywords /// -->
-      <ng-include src="'views/section-relevant.html'"></ng-include>
+      <div><ng-include src="'views/section-relevant.html'"></ng-include></div>
     </div>
 
   </div>

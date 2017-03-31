@@ -2,14 +2,6 @@
 
 angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope, $timeout, api) {
 
-  $scope.columnLocation = 8;
-  $scope.setColumnLocation = function (loc) {
-    $scope.columnLocation = loc;
-    if (loc === 0) { $scope.colHidden = 'left'; }
-    else if (loc === 12) { $scope.colHidden = 'right'; }
-    else { $scope.colHidden = null; }
-  };
-
   $scope.views = {
     'text': {
       closed: false,
@@ -48,6 +40,9 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     relatedKeywords: [],
     relatedKeywordsHighlightRegex: null
   };
+
+  $scope.columnLocation = 8;
+  $scope.setColumnLocation = function (loc) { $scope.columnLocation = loc; };
 
   $scope.closeView = function (view) {
     if ($scope.isMaximized(view)) { $scope.maximizeView(view); }
@@ -95,5 +90,28 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
       return '<span class="highlight">' + txt + '</span>';
     });
   };
+
+  $scope.dragulaSetup = function () {
+    if (dragula) {
+      var containers = [
+        document.getElementById('col-left'),
+        document.getElementById('col-right')
+      ];
+      var options = {
+        moves: function (el, source, handle, sibling) {
+          return handle.classList.contains('drag-handle');
+        },
+      };
+      dragula(containers, options);
+    }
+  };
+
+  $timeout(function () {
+    console.log(document.getElementById('col-left'));
+    $scope.dragulaSetup();
+  }, 100);
+
+
+
 
 });

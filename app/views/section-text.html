@@ -1,6 +1,8 @@
 <div class="section" id="text">
-  <div class="section-header {{ isMinimized('text') ? '' : 'bb0' }}">
-    <div class="section-text">Text</div>
+  <div class="section-header clearfix {{ isMinimized('text') ? '' : 'bb0' }}">
+    <div class="section-text">
+      <i class="fa fa-th drag-handle" aria-hidden="true"></i> Text
+    </div>
     <!-- close button -->
     <div class="section-button icon-only" ng-click="closeView('text')"><i class="fa fa-times" aria-hidden="true"></i></div>
     <!-- maximize button -->
