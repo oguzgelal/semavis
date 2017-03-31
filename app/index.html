@@ -28,10 +28,15 @@
     <![endif]-->
 
   <div ng-view=""></div>
+
   <div class="loading-cont" ng-if="loading">
     <div class="loading animated bounceIn">
       <i class="fa fa-clock-o animated flash infinite" aria-hidden="true"></i>
     </div>
+  </div>
+
+  <div class="section-cont" id="section-cont" ng-if="viewMaximized">
+    <div class="section-copy animated fadeInUp" id="section-copy"></div>
   </div>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
