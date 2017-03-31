@@ -44,11 +44,10 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   $scope.columnLocation = 8;
   $scope.setColumnLocation = function (loc) { $scope.columnLocation = loc; };
 
-  $scope.closeView = function (view) {
+  $scope.openCloseView = function (view) {
     if ($scope.isMaximized(view)) { $scope.maximizeView(view); }
-    else { $scope.views[view].closed = true; }
+    else { $scope.views[view].closed = !$scope.views[view].closed; }
   };
-  $scope.openView = function (view) { $scope.views[view].closed = false; };
   $scope.minimizeView = function (view) { $scope.views[view].minimized = !$scope.views[view].minimized; };
   $scope.maximizeView = function (view) {
     $scope.views[view].maximized = !$scope.views[view].maximized;
@@ -56,7 +55,7 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   };
   $scope.isMinimized = function (view) { return $scope.views[view].minimized; };
   $scope.isMaximized = function (view) { return $scope.views[view].maximized; };
-  $scope.isClosed = function (view) { return $scope.views[view].minimized; };
+  $scope.isClosed = function (view) { return $scope.views[view].closed; };
 
   $scope.toggleEdit = function (editOn) {
     if (editOn) {
@@ -106,9 +105,16 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     }
   };
 
+  $scope.tooltipsSetup = function () {
+    angular.element(document).ready(function () {
+      angular.element('body').tooltip({ selector: '[data-toggle=tooltip]' });
+    });
+  };
+
   $timeout(function () {
-    console.log(document.getElementById('col-left'));
     $scope.dragulaSetup();
+    $scope.tooltipsSetup();
+
   }, 100);
 
 

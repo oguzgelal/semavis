@@ -41,3 +41,13 @@
     <ng-include src="'views/section-relevant.html'" ng-if="viewMaximized && isMaximized('relevant')"></ng-include>
   </div>
 </div>
+
+<div class="closed-cont">
+  <div class="bubbles-cont">
+    <div class="closed-bubble animated bounceIn" ng-if="isClosed('text')" ng-click="openCloseView('text')" data-toggle="tooltip" data-placement="right" data-animation="false" data-delay='{"show":150, "hide":0 }' title="Text"></div>
+    <div class="closed-bubble animated bounceIn" ng-if="isClosed('heatmap')" ng-click="openCloseView('heatmap')" data-toggle="tooltip" data-placement="right" data-animation="false" data-delay='{"show":150, "hide":0 }' title="Heatmap"></div>
+    <div class="closed-bubble animated bounceIn" ng-if="isClosed('readability')" ng-click="openCloseView('readability')" data-toggle="tooltip" data-placement="right" data-animation="false" data-delay='{"show":150, "hide":0 }' title="Readability"></div>
+    <div class="closed-bubble animated bounceIn" ng-if="isClosed('suggestions')" ng-click="openCloseView('suggestions')" data-toggle="tooltip" data-placement="right" data-animation="false" data-delay='{"show":150, "hide":0 }' title="Keyword Suggestions"></div>
+    <div class="closed-bubble animated bounceIn" ng-if="isClosed('relevant')" ng-click="openCloseView('relevant')" data-toggle="tooltip" data-placement="right" data-animation="false" data-delay='{"show":150, "hide":0 }' title="Relevant Keywords"></div>
+  </div>
+</div>

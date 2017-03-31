@@ -1,14 +1,14 @@
-<div class="section" id="heatmap">
+<div class="section" id="heatmap" ng-if="!isClosed('heatmap')">
   <div class="section-header clearfix {{ isMinimized('heatmap') ? '' : 'bb0' }}">
     <div class="section-text">
       <i class="fa fa-th drag-handle" aria-hidden="true"></i> Heatmap
       </div>
     <!-- close button -->
-    <div class="section-button icon-only" ng-click="closeView('heatmap')"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div class="section-button icon-only" data-toggle="tooltip" title="Close" ng-click="openCloseView('heatmap')"><i class="fa fa-times" aria-hidden="true"></i></div>
     <!-- maximize button -->
-    <div class="section-button icon-only {{ isMaximized('heatmap') ? 'active' : '' }}" ng-click="maximizeView('heatmap')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMaximized('heatmap') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('heatmap') ? 'Cancel maximize' : 'Maximize' }}" ng-click="maximizeView('heatmap')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
     <!-- minimize button -->
-    <div class="section-button icon-only {{ isMinimized('heatmap') ? 'active' : '' }}" ng-click="minimizeView('heatmap')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMinimized('heatmap') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('heatmap') ? 'Cancel maximize' : 'Minimize' }}" ng-click="minimizeView('heatmap')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
   </div>
   <div class="mock-box bt0" ng-if="!isMinimized('heatmap')"></div>
 </div>

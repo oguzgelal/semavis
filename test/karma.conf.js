@@ -31,6 +31,7 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/sweetalert/dist/sweetalert.min.js',
       'bower_components/dragula.js/dist/dragula.js',
+      'bower_components/angular-tooltips/dist/angular-tooltips.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

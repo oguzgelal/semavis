@@ -1,14 +1,14 @@
-<div class="section">
+<div class="section" ng-if="!isClosed('readability')">
   <div class="section-header clearfix {{ isMinimized('readability') ? '' : 'bb0' }}">
     <div class="section-text">
       <i class="fa fa-th drag-handle" aria-hidden="true"></i> Readability
     </div>
     <!-- close button -->
-    <div class="section-button icon-only" ng-click="closeView('readability')"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div class="section-button icon-only" data-toggle="tooltip" title="Close" ng-click="openCloseView('readability')"><i class="fa fa-times" aria-hidden="true"></i></div>
     <!-- maximize button -->
-    <div class="section-button icon-only {{ isMaximized('readability') ? 'active' : '' }}" ng-click="maximizeView('readability')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMaximized('readability') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('readability') ? 'Cancel maximize' : 'Maximize' }}" ng-click="maximizeView('readability')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
     <!-- minimize button -->
-    <div class="section-button icon-only {{ isMinimized('readability') ? 'active' : '' }}" ng-click="minimizeView('readability')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+    <div class="section-button icon-only {{ isMinimized('readability') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMaximized('readability') ? 'Cancel maximize' : 'Minimize' }}" ng-click="minimizeView('readability')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
   </div>
   <div class="mock-box bt0" ng-if="!isMinimized('readability')"></div>
 </div>

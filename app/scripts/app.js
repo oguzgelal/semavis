@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('semavisApp', [
-  'ngAnimate',
   'ngCookies',
   'ngResource',
   'ngRoute',
