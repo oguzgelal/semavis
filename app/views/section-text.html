@@ -1,0 +1,23 @@
+<div class="section" id="text">
+  <div class="section-header {{ isMinimized('text') ? '' : 'bb0' }}">
+    <div class="section-text">Text</div>
+    <!-- close button -->
+    <div class="section-button icon-only" ng-click="closeView('text')"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <!-- maximize button -->
+    <div class="section-button icon-only {{ isMaximized('text') ? 'active' : '' }}" ng-click="maximizeView('text')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <!-- minimize button -->
+    <div class="section-button icon-only {{ isMinimized('text') ? 'active' : '' }}" ng-click="minimizeView('text')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+    <!-- analyse button -->
+    <div class="section-button" ng-click="analyze()">
+      <i class="fa fa-cogs" aria-hidden="true"></i> Analyse
+    </div>
+    <!-- edit button -->
+    <div class="section-button {{ views['text'].edit ? 'active' : '' }}" ng-click="toggleEdit(!views['text'].edit)">
+      <i class="fa fa-pencil" aria-hidden="true"></i> {{ views['text'].edit ? 'Editing' : 'Edit' }}
+    </div>
+  </div>
+  <div ng-if="!isMinimized('text')">
+    <textarea class="text-edit bt0" ng-model="input.corpus" ng-if="views['text'].edit" placeholder="Enter your content..."></textarea>
+    <div class="text-edit text-edit-static text-edit-highlight bt0" ng-if="!views['text'].edit" ng-bind-html="input.corpusHtml"></div>
+  </div>
+</div>

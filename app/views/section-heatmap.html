@@ -1,0 +1,12 @@
+<div class="section" id="heatmap">
+  <div class="section-header {{ isMinimized('heatmap') ? '' : 'bb0' }}">
+    <div class="section-text">Heatmap</div>
+    <!-- close button -->
+    <div class="section-button icon-only" ng-click="closeView('heatmap')"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <!-- maximize button -->
+    <div class="section-button icon-only {{ isMaximized('heatmap') ? 'active' : '' }}" ng-click="maximizeView('heatmap')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <!-- minimize button -->
+    <div class="section-button icon-only {{ isMinimized('heatmap') ? 'active' : '' }}" ng-click="minimizeView('heatmap')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+  </div>
+  <div class="mock-box bt0" ng-if="!isMinimized('heatmap')"></div>
+</div>

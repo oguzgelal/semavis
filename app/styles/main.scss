@@ -27,6 +27,7 @@ body {
   color: $textcolor;
   font-family: 'Nunito Sans', sans-serif;
 }
+.m0 { margin: 0 !important; }
 .pm0 {
   @media screen and (max-width: $mobile-width) {
     padding: 0 !important;
@@ -148,7 +149,8 @@ body {
 }
 
 .content-container {
-  margin-top: 15px;
+  margin-top: 10px;
+  @media screen and (max-width: $mobile-width) { margin-top: 15px; }
 }
 
 .text-edit {
@@ -177,8 +179,8 @@ body {
 
 
 .results-container {
-  margin-top: 15px;
-  padding: 0;
+  margin-top: 10px;
+  @media screen and (max-width: $mobile-width) { padding: 0; margin-top: 15px; }
 }
 
 .mock-box {
@@ -217,17 +219,54 @@ body {
 
 .section-cont {
   .section-copy{
-    animation-duration: .5s;
-    -moz-animation-duration: .5s;
-    -o-animation-duration: .5s;
-    -webkit-animation-duration: .5s;
-    -ms-animation-duration: .5s;
+    animation-duration: .1s;
+    -moz-animation-duration: .1s;
+    -o-animation-duration: .1s;
+    -webkit-animation-duration: .1s;
+    -ms-animation-duration: .1s;
     .section {
+      text-align: left;
       margin: 50px !important;
     }
   }
 }
 
-
+.scale {
+  @media screen and (max-width: $mobile-width) { display: none; }
+  height: 5px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+  .markloc {
+    margin-top: -1px;
+    color: lightgray;
+    font-size: 8px;
+    width: 80px;
+  }
+  i.pull-left { margin-left: -7px; }
+  i.pull-right { margin-right: -7px; }
+  .markloc.pull-left {
+    margin-left: -42px;
+    padding-left: 40px;
+    text-align: left;
+  }
+  .markloc.pull-right {
+    margin-right: -42px;
+    padding-right: 40px;
+    text-align: right;
+  }
+  .markloc:hover {
+    font-size: 14px;
+    margin-top: -6px;
+    font-weight: bolder;
+    color: $basecolor;
+    cursor: pointer;
+  }
+  i {
+    color: $basecolor;
+    font-size: 23px;
+    margin-top: -12px;
+  }
+}
 
 

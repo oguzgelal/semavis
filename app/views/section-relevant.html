@@ -1,0 +1,16 @@
+<div class="section">
+  <div class="section-header {{ isMinimized('relevant') ? '' : 'bb0' }}">
+    <div class="section-text">Relevant Keywords</div>
+    <!-- close button -->
+    <div class="section-button icon-only" ng-click="closeView('relevant')"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <!-- maximize button -->
+    <div class="section-button icon-only {{ isMaximized('relevant') ? 'active' : '' }}" ng-click="maximizeView('relevant')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <!-- minimize button -->
+    <div class="section-button icon-only {{ isMinimized('relevant') ? 'active' : '' }}" ng-click="minimizeView('relevant')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+  </div>
+  <div class="keyword-box bt0" ng-if="!isMinimized('relevant')">
+    <ul>
+      <li ng-repeat="key in output.relatedKeywords">{{ key }}</li>
+    </ul>
+  </div>
+</div>

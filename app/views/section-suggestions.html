@@ -1,0 +1,12 @@
+<div class="section">
+  <div class="section-header {{ isMinimized('suggestions') ? '' : 'bb0' }}">
+    <div class="section-text">Suggested Keywords</div>
+    <!-- close button -->
+    <div class="section-button icon-only" ng-click="closeView('suggestions')"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <!-- maximize button -->
+    <div class="section-button icon-only {{ isMaximized('suggestions') ? 'active' : '' }}" ng-click="maximizeView('suggestions')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
+    <!-- minimize button -->
+    <div class="section-button icon-only {{ isMinimized('suggestions') ? 'active' : '' }}" ng-click="minimizeView('suggestions')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
+  </div>
+  <div class="mock-box bt0" ng-if="!isMinimized('suggestions')"></div>
+</div>

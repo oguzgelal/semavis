@@ -1,113 +1,43 @@
 <div class="container">
+  <div class="row m0">
 
-  <div class="col-xs-12 header-container">
-    <div class="header-l1">Semavis</div>
-    <!--<div class="header-l2">Semantic Relevancy Visualisation</div>-->
-  </div>
-
-  <!-- /// content /// -->
-  <div class="col-sm-8 col-xs-12 pm0 pl0 content-container">
-    <div class="section" id="text">
-      <div class="section-header {{ isMinimized('text') ? '' : 'bb0' }}">
-        <div class="section-text">Text</div>
-        <!-- close button -->
-        <div class="section-button icon-only" ng-click="closeView('text')"><i class="fa fa-times" aria-hidden="true"></i></div>
-        <!-- maximize button -->
-        <div class="section-button icon-only {{ isMaximized('text') ? 'active' : '' }}" ng-click="maximizeView('text')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
-        <!-- minimize button -->
-        <div class="section-button icon-only {{ isMinimized('text') ? 'active' : '' }}" ng-click="minimizeView('text')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
-        <!-- analyse button -->
-        <div class="section-button" ng-click="analyze()">
-          <i class="fa fa-cogs" aria-hidden="true"></i> Analyse
-        </div>
-        <!-- edit button -->
-        <div class="section-button {{ views['text'].edit ? 'active' : '' }}" ng-click="toggleEdit(!views['text'].edit)">
-          <i class="fa fa-pencil" aria-hidden="true"></i> {{ views['text'].edit ? 'Editing' : 'Edit' }}
-        </div>
-      </div>
-      <div ng-if="!isMinimized('text')">
-        <textarea class="text-edit bt0" ng-model="input.corpus" ng-if="views['text'].edit" placeholder="Enter your content..."></textarea>
-        <div class="text-edit text-edit-static text-edit-highlight bt0" ng-if="!views['text'].edit" ng-bind-html="input.corpusHtml"></div>
-      </div>
+    <div class="col-xs-12 header-container">
+      <div class="header-l1">Semavis</div>
+      <!--<div class="header-l2">Semantic Relevancy Visualisation</div>-->
     </div>
+
+    <ng-include src="'views/scale.html'"></ng-include>
+
+    <div class="col-sm-{{ columnLocation }} col-xs-12 pm0 pl0 content-container" ng-if="colHidden!=='left'">
+      <!-- /// text /// -->
+      <ng-include src="'views/section-text.html'"></ng-include>
+    </div>
+
+    <div class="col-sm-{{ (12 - columnLocation) }} col-xs-12 pr0 results-container" ng-if="colHidden!=='right'">
+      <!-- /// heatmap /// -->
+      <ng-include src="'views/section-heatmap.html'"></ng-include>
+      <!-- /// readability /// -->
+      <ng-include src="'views/section-readability.html'"></ng-include>
+      <!-- /// suggested keywords /// -->
+      <ng-include src="'views/section-suggestions.html'"></ng-include>
+      <!-- /// relevant keywords /// -->
+      <ng-include src="'views/section-relevant.html'"></ng-include>
+    </div>
+
   </div>
+</div>
 
-  <div class="col-sm-4 col-xs-12 pr0 results-container">
-
+<div class="section-cont" ng-if="viewMaximized">
+  <div class="section-copy animated zoomIn">
+    <!-- /// text /// -->
+    <ng-include src="'views/section-text.html'" ng-if="viewMaximized && isMaximized('text')"></ng-include>
     <!-- /// heatmap /// -->
-    <div class="section" id="heatmap">
-      <div class="section-header {{ isMinimized('heatmap') ? '' : 'bb0' }}">
-        <div class="section-text">Heatmap</div>
-        <!-- close button -->
-        <div class="section-button icon-only" ng-click="closeView('heatmap')"><i class="fa fa-times" aria-hidden="true"></i></div>
-        <!-- maximize button -->
-        <div class="section-button icon-only {{ isMaximized('heatmap') ? 'active' : '' }}" ng-click="maximizeView('heatmap')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
-        <!-- minimize button -->
-        <div class="section-button icon-only {{ isMinimized('heatmap') ? 'active' : '' }}" ng-click="minimizeView('heatmap')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
-      </div>
-      <div class="mock-box bt0" ng-if="!isMinimized('heatmap')"></div>
-    </div>
-
-    <!-- /// cluster details /// -->
-    <div class="section">
-      <div class="section-header {{ isMinimized('details') ? '' : 'bb0' }}">
-        <div class="section-text">Cluster Details</div>
-        <!-- close button -->
-        <div class="section-button icon-only" ng-click="closeView('details')"><i class="fa fa-times" aria-hidden="true"></i></div>
-        <!-- maximize button -->
-        <div class="section-button icon-only {{ isMaximized('details') ? 'active' : '' }}" ng-click="maximizeView('details')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
-        <!-- minimize button -->
-        <div class="section-button icon-only {{ isMinimized('details') ? 'active' : '' }}" ng-click="minimizeView('details')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
-      </div>
-      <div class="mock-box bt0" ng-if="!isMinimized('details')"></div>
-    </div>
-
+    <ng-include src="'views/section-heatmap.html'" ng-if="viewMaximized && isMaximized('heatmap')"></ng-include>
     <!-- /// readability /// -->
-    <div class="section">
-      <div class="section-header {{ isMinimized('readability') ? '' : 'bb0' }}">
-        <div class="section-text">Readability</div>
-        <!-- close button -->
-        <div class="section-button icon-only" ng-click="closeView('readability')"><i class="fa fa-times" aria-hidden="true"></i></div>
-        <!-- maximize button -->
-        <div class="section-button icon-only {{ isMaximized('readability') ? 'active' : '' }}" ng-click="maximizeView('readability')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
-        <!-- minimize button -->
-        <div class="section-button icon-only {{ isMinimized('readability') ? 'active' : '' }}" ng-click="minimizeView('readability')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
-      </div>
-      <div class="mock-box bt0" ng-if="!isMinimized('readability')"></div>
-    </div>
-
-    <!-- /// suggested keywords /// -->
-    <div class="section">
-      <div class="section-header {{ isMinimized('suggestions') ? '' : 'bb0' }}">
-        <div class="section-text">Suggested Keywords</div>
-        <!-- close button -->
-        <div class="section-button icon-only" ng-click="closeView('suggestions')"><i class="fa fa-times" aria-hidden="true"></i></div>
-        <!-- maximize button -->
-        <div class="section-button icon-only {{ isMaximized('suggestions') ? 'active' : '' }}" ng-click="maximizeView('suggestions')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
-        <!-- minimize button -->
-        <div class="section-button icon-only {{ isMinimized('suggestions') ? 'active' : '' }}" ng-click="minimizeView('suggestions')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
-      </div>
-      <div class="mock-box bt0" ng-if="!isMinimized('suggestions')"></div>
-    </div>
-
-    <!-- /// relevant keywords /// -->
-    <div class="section">
-      <div class="section-header {{ isMinimized('relevant') ? '' : 'bb0' }}">
-        <div class="section-text">Relevant Keywords</div>
-        <!-- close button -->
-        <div class="section-button icon-only" ng-click="closeView('relevant')"><i class="fa fa-times" aria-hidden="true"></i></div>
-        <!-- maximize button -->
-        <div class="section-button icon-only {{ isMaximized('relevant') ? 'active' : '' }}" ng-click="maximizeView('relevant')"><i class="fa fa-window-maximize" aria-hidden="true"></i></div>
-        <!-- minimize button -->
-        <div class="section-button icon-only {{ isMinimized('relevant') ? 'active' : '' }}" ng-click="minimizeView('relevant')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
-      </div>
-      <div class="keyword-box bt0" ng-if="!isMinimized('relevant')">
-        <ul>
-          <li ng-repeat="key in output.relatedKeywords">{{ key }}</li>
-        </ul>
-      </div>
-    </div>
-
+    <ng-include src="'views/section-readability.html'" ng-if="viewMaximized && isMaximized('readability')"></ng-include>
+    <!-- /// suggestions /// -->
+    <ng-include src="'views/section-suggestions.html'" ng-if="viewMaximized && isMaximized('suggestions')"></ng-include>
+    <!-- /// relevant /// -->
+    <ng-include src="'views/section-relevant.html'" ng-if="viewMaximized && isMaximized('relevant')"></ng-include>
   </div>
-
 </div>
