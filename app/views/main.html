@@ -8,37 +8,34 @@
 
     <ng-include src="'views/scale.html'"></ng-include>
 
-    <div class="col-sm-{{ columnLocation }} col-xs-12 pm0 pl0 {{ columnLocation===12 ? 'pr0' : '' }} content-container {{ columnLocation===0 ? 'hidden' : '' }}" id="col-left">
-      <!-- /// text /// -->
-      <div><ng-include src="'views/section-text.html'"></ng-include></div>
+    <div class="col-sm-{{ views.columnLocation }} col-xs-12 pm0 pl0 {{ views.columnLocation===12 ? 'pr0' : '' }} content-container {{ views.columnLocation===0 ? 'hidden' : '' }}" id="col-left">
+      <div ng-repeat="section in columns.left" id="{{ section }}">
+        <ng-include src="getTemplateName(section)"></ng-include>
+      </div>
     </div>
 
-    <div class="col-sm-{{ (12 - columnLocation) }} col-xs-12 pr0 {{ columnLocation===0 ? 'pl0' : '' }} results-container {{ columnLocation===12 ? 'hidden' : '' }}" id="col-right">
-      <!-- /// heatmap /// -->
-      <div><ng-include class="movable" src="'views/section-heatmap.html'"></ng-include></div>
-      <!-- /// readability /// -->
-      <div><ng-include src="'views/section-readability.html'"></ng-include></div>
-      <!-- /// suggested keywords /// -->
-      <div><ng-include src="'views/section-suggestions.html'"></ng-include></div>
-      <!-- /// relevant keywords /// -->
-      <div><ng-include src="'views/section-relevant.html'"></ng-include></div>
+    <div class="col-sm-{{ (12 - views.columnLocation) }} col-xs-12 pr0 {{ views.columnLocation===0 ? 'pl0' : '' }} results-container {{ views.columnLocation===12 ? 'hidden' : '' }}" id="col-right">
+      <div ng-repeat="section in columns.right" id="{{ section }}">
+        <ng-include src="getTemplateName(section)"></ng-include>
+      </div>
+      <!--
+      <div id="heatmap"><ng-include class="movable" src="'views/section-heatmap.html'"></ng-include></div>
+      <div id="readability"><ng-include src="'views/section-readability.html'"></ng-include></div>
+      <div id="suggestions"><ng-include src="'views/section-suggestions.html'"></ng-include></div>
+      <div id="relevant"><ng-include src="'views/section-relevant.html'"></ng-include></div>
+      -->
     </div>
 
   </div>
 </div>
 
-<div class="section-cont" ng-if="viewMaximized">
+<div class="section-cont" ng-if="views.viewMaximized">
   <div class="section-copy animated zoomIn">
-    <!-- /// text /// -->
-    <ng-include src="'views/section-text.html'" ng-if="viewMaximized && isMaximized('text')"></ng-include>
-    <!-- /// heatmap /// -->
-    <ng-include src="'views/section-heatmap.html'" ng-if="viewMaximized && isMaximized('heatmap')"></ng-include>
-    <!-- /// readability /// -->
-    <ng-include src="'views/section-readability.html'" ng-if="viewMaximized && isMaximized('readability')"></ng-include>
-    <!-- /// suggestions /// -->
-    <ng-include src="'views/section-suggestions.html'" ng-if="viewMaximized && isMaximized('suggestions')"></ng-include>
-    <!-- /// relevant /// -->
-    <ng-include src="'views/section-relevant.html'" ng-if="viewMaximized && isMaximized('relevant')"></ng-include>
+    <ng-include src="'views/section-text.html'" ng-if="views.viewMaximized && isMaximized('text')"></ng-include>
+    <ng-include src="'views/section-heatmap.html'" ng-if="views.viewMaximized && isMaximized('heatmap')"></ng-include>
+    <ng-include src="'views/section-readability.html'" ng-if="views.viewMaximized && isMaximized('readability')"></ng-include>
+    <ng-include src="'views/section-suggestions.html'" ng-if="views.viewMaximized && isMaximized('suggestions')"></ng-include>
+    <ng-include src="'views/section-relevant.html'" ng-if="views.viewMaximized && isMaximized('relevant')"></ng-include>
   </div>
 </div>
 

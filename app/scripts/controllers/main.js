@@ -2,7 +2,14 @@
 
 angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope, $timeout, api) {
 
+
+  $scope.columns = {
+    'left': ['text'],
+    'right': ['heatmap', 'readability', 'suggestions', 'relevant']
+  };
   $scope.views = {
+    'columnLocation': 8,
+    'viewMaximized': false,
     'text': {
       closed: false,
       minimized: false,
@@ -31,6 +38,8 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     }
   };
 
+  $scope.getTemplateName = function (view) { return 'views/section-' + view + '.html'; };
+
   $scope.input = {
     corpus: '',
     corpusHtml: ''
@@ -40,18 +49,24 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     relatedKeywords: [],
     relatedKeywordsHighlightRegex: null
   };
-
-  $scope.columnLocation = 8;
-  $scope.setColumnLocation = function (loc) { $scope.columnLocation = loc; };
+  $scope.setColumnLocation = function (loc) {
+    $scope.views.columnLocation = loc;
+    $scope.saveLs();
+  };
 
   $scope.openCloseView = function (view) {
     if ($scope.isMaximized(view)) { $scope.maximizeView(view); }
     else { $scope.views[view].closed = !$scope.views[view].closed; }
+    $scope.saveLs();
   };
-  $scope.minimizeView = function (view) { $scope.views[view].minimized = !$scope.views[view].minimized; };
+  $scope.minimizeView = function (view) {
+    $scope.views[view].minimized = !$scope.views[view].minimized;
+    $scope.saveLs();
+  };
   $scope.maximizeView = function (view) {
     $scope.views[view].maximized = !$scope.views[view].maximized;
-    $rootScope.viewMaximized = $scope.views[view].maximized;
+    $scope.views.viewMaximized = $scope.views[view].maximized;
+    $scope.saveLs();
   };
   $scope.isMinimized = function (view) { return $scope.views[view].minimized; };
   $scope.isMaximized = function (view) { return $scope.views[view].maximized; };
@@ -72,7 +87,6 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     $scope.toggleEdit(false);
     $rootScope.loading = true;
     api.extractKeywords($scope.input.corpus).then(function (res) {
-      $scope.columnLocation = 4;
       $scope.output.relatedKeywords = res.data;
       $scope.highlightRegex();
       $rootScope.loading = false;
@@ -90,6 +104,21 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     });
   };
 
+  $scope.syncColumnsOrders = function () {
+    var leftCol = document.getElementById('col-left');
+    var rightCol = document.getElementById('col-right');
+    if (leftCol && rightCol) {
+      if (leftCol.children) {
+        var arr1 = [].slice.call(leftCol.children);
+        $scope.columns.left = arr1.map(function (i) { return i.id; });
+      }
+      if (rightCol.children) {
+        var arr2 = [].slice.call(rightCol.children);
+        $scope.columns.right = arr2.map(function (i) { return i.id; });
+      }
+    }
+  };
+
   $scope.dragulaSetup = function () {
     if (dragula) {
       var containers = [
@@ -101,7 +130,11 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
           return handle.classList.contains('drag-handle');
         },
       };
-      dragula(containers, options);
+      var drake = dragula(containers, options);
+      drake.on('drop', function (el, target, source, sibling) {
+        $scope.syncColumnsOrders();
+        $scope.saveLs();
+      });
     }
   };
 
@@ -114,10 +147,19 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   $timeout(function () {
     $scope.dragulaSetup();
     $scope.tooltipsSetup();
-
   }, 100);
 
+  $scope.restoreLs = function () {
+    var lsViews = localStorage.getItem('semavis-views');
+    var lsColumns = localStorage.getItem('semavis-columns');
+    if (lsViews) { $scope.views = JSON.parse(lsViews); }
+    if (lsColumns) { $scope.columns = JSON.parse(lsColumns); }
+  };
+  $scope.saveLs = function () {
+    localStorage.setItem('semavis-views', JSON.stringify($scope.views));
+    localStorage.setItem('semavis-columns', JSON.stringify($scope.columns));
+  };
 
-
+  $scope.restoreLs();
 
 });
