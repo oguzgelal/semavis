@@ -331,3 +331,43 @@ body {
     }
   }
 }
+
+
+.heatmap-container {
+  padding: 30px;
+  .heatmap {
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    
+    .heatmap-row {
+      display: flex;
+      .heatmap-col {
+        flex-grow: 1;
+      }
+      .heatmap-col {
+        position: relative;
+        .heatmap-clustermarker {
+          position: absolute;
+          border-radius: 50%;
+          //border: 1px solid black;
+          background-color: black;
+          z-index: 999999;
+        }
+      }
+    }
+
+    .heatmap-cluster-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999998;
+      opacity: 0.22;
+    }
+  }
+}
+
+
+

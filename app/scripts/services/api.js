@@ -21,6 +21,17 @@ angular.module('semavisApp').service('api', function ($rootScope, $http) {
     }
   };
 
+  api.sliceText = function (body) {
+    return $http({
+      method: 'POST',
+      url: api.base + '/text/slices',
+      timeout: 180000,
+      headers: api.getHeaders(),
+      params: { 'retina_name': 'en_associative' },
+      data: body
+    });
+  };
+
   api.extractKeywords = function (body) {
     return $http({
       method: 'POST',
