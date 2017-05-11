@@ -12,7 +12,7 @@
   </div>
   <div class="keyword-box bt0" ng-if="!isMinimized('relevant')">
     <ul>
-      <li ng-repeat="key in output.relatedKeywords">{{ key }}</li>
+      <li ng-repeat="key in output.relatedKeywords track by $index">{{ key }}</li>
     </ul>
   </div>
 </div>

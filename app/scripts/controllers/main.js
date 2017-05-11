@@ -2,6 +2,7 @@
 
 angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope, $timeout, api) {
 
+  $scope.heatmapSize = 128; // 128 x 128
 
   $scope.columns = {
     'left': ['text'],
@@ -40,15 +41,34 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
 
   $scope.getTemplateName = function (view) { return 'views/section-' + view + '.html'; };
 
-  $scope.input = {
-    corpus: '',
-    corpusHtml: ''
+  $scope.initReset = function () {
+
+    $scope.input = {
+      corpus: '',
+      corpusHtml: ''
+    };
+
+    $scope.resetOutput();
   };
 
-  $scope.output = {
-    relatedKeywords: [],
-    relatedKeywordsHighlightRegex: null
+  $scope.resetOutput = function () {
+    $scope.output = {
+      relatedKeywords: [],
+      relatedKeywordsHighlightRegex: null,
+      suggestedKeywords: [],
+      fingerprints: [],
+      heatmap: []
+    };
+
+    // initialise the heatmap data
+    for (var i = 0; i < $scope.heatmapSize; i++) {
+      $scope.output.heatmap[i] = [];
+      for (var y = 0; y < $scope.heatmapSize; y++) {
+        $scope.output.heatmap[i][y] = 0;
+      }
+    }
   };
+
   $scope.setColumnLocation = function (loc) {
     $scope.views.columnLocation = loc;
     $scope.saveLs();
@@ -84,15 +104,63 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   };
 
   $scope.analyze = function () {
+    $scope.resetOutput();
     $scope.toggleEdit(false);
     $rootScope.loading = true;
     api.extractKeywords($scope.input.corpus).then(function (res) {
       $scope.output.relatedKeywords = res.data;
       $scope.highlightRegex();
+      $scope.processRelatedKeywords();
       $rootScope.loading = false;
     }, function () {
       swal('Oops...', 'Something went wrong!', 'error');
       $rootScope.loading = false;
+    });
+  };
+
+  $scope.printHeatmap = function () {
+    console.log('--------------------------------------');
+    for (var i = 0; i < $scope.heatmapSize; i++) { console.log($scope.output.heatmap[i].join('')); }
+    console.log('--------------------------------------');
+  };
+
+  $scope.insertDataToHeatmap = function (dataArr) {
+    if (!$scope.output.heatmap) { $scope.output.heatmap = []; }
+    for (var i = 0; i < dataArr.length; i++) {
+      var index = dataArr[i];
+      var row = index % $scope.heatmapSize;
+      var col = (index - row) / $scope.heatmapSize;
+      $scope.output.heatmap[row][col] += 1;
+    }
+    // $scope.printHeatmap();
+  };
+
+  $scope.getFingerPrint = function (term) {
+    if (!$scope.output.fingerprints) { $scope.output.fingerprints = []; }
+    api.getFingerprints(term).then(function (data) {
+      $scope.output.fingerprints.push(data.data[0].fingerprint.positions);
+      $scope.insertDataToHeatmap(data.data[0].fingerprint.positions);
+    }, function () {
+      swal('Oops...', 'Something went wrong while generating the fingerprint', 'error');
+    });
+  };
+
+  $scope.processRelatedKeywords = function () {
+    if ($scope.output.relatedKeywords) {
+      for (var i = 0; i < $scope.output.relatedKeywords.length; i++) {
+        $scope.getFingerPrint($scope.output.relatedKeywords[i]);
+        $scope.getSuggestedKeywords($scope.output.relatedKeywords[i]);
+      }
+    }
+  };
+
+  $scope.getSuggestedKeywords = function (keyword) {
+    if (!$scope.output.suggestedKeywords){ $scope.output.suggestedKeywords = []; }
+    api.getSuggestedKeywords(keyword).then(function (data) {
+      var suggestedKeys = data.data.map(function(i){ return i.term; });
+      $scope.output.suggestedKeywords = $scope.output.suggestedKeywords.concat(suggestedKeys);
+    }, function () {
+      swal('Oops...', 'Something went wrong while getting suggested keywords', 'error');
     });
   };
 
@@ -161,5 +229,6 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   };
 
   $scope.restoreLs();
+  $scope.initReset();
 
 });

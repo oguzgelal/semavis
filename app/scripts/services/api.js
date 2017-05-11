@@ -32,7 +32,33 @@ angular.module('semavisApp').service('api', function ($rootScope, $http) {
     });
   };
 
-  // TODO: To suggest keywords, call -> /terms/similar_terms
+  api.getFingerprints = function (keyword) {
+    return $http({
+      method: 'GET',
+      url: api.base + '/terms',
+      timeout: 180000,
+      headers: api.getHeaders(),
+      params: {
+        'term': keyword,
+        'get_fingerprint': 'true'
+      }
+    });
+  };
+
+  api.getSuggestedKeywords = function (keyword) {
+    return $http({
+      method: 'GET',
+      url: api.base + '/terms/similar_terms',
+      timeout: 180000,
+      headers: api.getHeaders(),
+      params: {
+        'retina_name': 'en_associative',
+        'term': keyword,
+        'get_fingerprint': false,
+        'max_results': 3
+      }
+    });
+  };
 
   return api;
 });

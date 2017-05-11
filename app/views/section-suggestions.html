@@ -10,5 +10,9 @@
     <!-- minimize button -->
     <div class="section-button icon-only {{ isMinimized('suggestions') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMinimized('suggestions') ? 'Expand' : 'Minimize' }}" ng-click="minimizeView('suggestions')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
   </div>
-  <div class="mock-box bt0" ng-if="!isMinimized('suggestions')"></div>
+  <div class="keyword-box bt0" ng-if="!isMinimized('suggestions')">
+    <ul>
+      <li ng-repeat="key in output.suggestedKeywords track by $index">{{ key }}</li>
+    </ul>
+  </div>
 </div>
