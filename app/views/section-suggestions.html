@@ -1,7 +1,7 @@
 <div class="section" ng-if="!isClosed('suggestions')">
   <div class="section-header clearfix {{ isMinimized('suggestions') ? '' : 'bb0' }}">
     <div class="section-text">
-      <i class="fa fa-th drag-handle" aria-hidden="true"></i> Suggested Keywords
+      <i class="fa fa-th drag-handle" aria-hidden="true"></i> Suggestions
     </div>
     <!-- close button -->
     <div class="section-button icon-only" data-toggle="tooltip" title="Close" ng-click="openCloseView('suggestions')"><i class="fa fa-times" aria-hidden="true"></i></div>
@@ -11,8 +11,42 @@
     <div class="section-button icon-only {{ isMinimized('suggestions') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMinimized('suggestions') ? 'Expand' : 'Minimize' }}" ng-click="minimizeView('suggestions')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
   </div>
   <div class="keyword-box bt0" ng-if="!isMinimized('suggestions')">
+    <!--
     <ul>
       <li ng-repeat="key in output.suggestedKeywords track by $index">{{ key }}</li>
     </ul>
+    -->
+    <div style="padding: 30px;">
+      <div>
+        <h3 style="margin-top: 0; margin-bottom: 20px;">Analyzing the Heatmap <i class="fa fa-question-circle hover pull-right" ng-click="helpClicked()" aria-hidden="true"></i></h3>
+        <p>
+          The goal is to get the shaded areas (clusters) and other dense regions closer to eachother as much as possible. So first chose a <b>source cluster / region</b>, and move it closer to a <b>destination cluster</b>.
+          <ul>
+            <li>
+              <i class="fa fa-check" aria-hidden="true" style="color: rgba(46, 204, 113,1.0);" ng-if="suggestionClickedStart"></i>
+              <b>Step 1</b> - Click on the source cluster / region
+            </li>
+            <li>
+              <i class="fa fa-check" aria-hidden="true" style="color: rgba(46, 204, 113,1.0);" ng-if="suggestionClickedEnd"></i>
+              <b>Step 2</b> - Click on the destination cluster
+            </li>
+            <li ng-if="suggestionClickedStart && suggestionClickedEnd">
+              <i class="fa fa-info" aria-hidden="true" style="color: rgba(52, 152, 219,1.0); margin-left: 6px; margin-right: 4px;"></i>
+              <b>Step 3</b> - Click on the map to reset
+            </li>
+          </ul>
+        </p>
+      </div>
+      <div ng-if="suggestionClickedStart && suggestionClickedEnd">
+        <div class="loading" ng-if="suggestionsLoading" style="text-align: center;">
+          <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+        </div>
+        <div>You should mention below keywords a little less</div>
+        <ul><li ng-repeat="less in suggestionMentionLess track by $index">{{ less }}</li></ul>
+        <div>You should mention below keywords a little more</div>
+        <ul><li ng-repeat="more in suggestionMentionMore track by $index">{{ more }}</li></ul>
+      </div>
+    </div>
+
   </div>
 </div>

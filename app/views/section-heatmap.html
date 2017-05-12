@@ -16,12 +16,12 @@
       <div class="heatmap" style="width: {{heatmapDimentions}}px !important; height: {{heatmapDimentions}}px;">
 
         <div class="heatmap-row" ng-repeat="hrow in output.heatmap track by $index">
-          <div class="heatmap-col" ng-repeat="hcol in hrow track by $index" style="height: {{ heatmapDimentions / heatmapSize }}px; background-color: {{ getCellColor(hcol) }};"></div>
+          <div class="heatmap-col" ng-click="mapClicked(hcol, $parent.$index, $index)" ng-repeat="hcol in hrow track by $index" style="height: {{ heatmapDimentions / heatmapSize }}px; background-color: {{ getCellColor(hcol) }};"></div>
         </div>
 
         <div class="heatmap-cluster-layer">
           <div class="heatmap-row" ng-repeat="hrow in output.heatmap track by $index">
-            <div class="heatmap-col" ng-repeat="hcol in hrow track by $index" style="height: {{ heatmapDimentions / heatmapSize }}px;">
+            <div class="heatmap-col" ng-click="mapClicked(hcol, $parent.$index, $index)" ng-repeat="hcol in hrow track by $index" style="height: {{ heatmapDimentions / heatmapSize }}px;">
               <div class="heatmap-clustermarker" ng-if="isClusterMarked($parent.$index, $index) ? 'marked' : ''" style="height: {{ (heatmapDimentions / heatmapSize) * clusterSize * 1.6 }}px; width: {{ (heatmapDimentions / heatmapSize) * clusterSize * 1.6 }}px; top: -{{ ((heatmapDimentions / heatmapSize) * clusterSize * 1.6) / 2 }}px; left: -{{ ((heatmapDimentions / heatmapSize) * clusterSize * 1.6) / 2 }}px;"></div>
             </div>
           </div>

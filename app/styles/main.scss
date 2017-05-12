@@ -22,6 +22,8 @@ $loading-bg: rgba(0,0,0,.8);
   padding: 0.2em 0;
 }
 
+.hover:hover {cursor: pointer;}
+
 body {
   background-color: $bgcolor;
   color: $textcolor;
@@ -367,6 +369,7 @@ body {
       opacity: 0.22;
     }
   }
+  .heatmap:hover {cursor: pointer;}
 }
 
 
