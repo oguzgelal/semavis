@@ -89,6 +89,8 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     $scope.suggestionClickedEnd = '';
     $scope.suggestionMentionLess = [];
     $scope.suggestionMentionMore = [];
+    $scope.suggestionMentionLessContext = [];
+    $scope.suggestionMentionMoreContext = [];
     $scope.suggestionMentionMoreContext = [];
   };
 
@@ -115,6 +117,10 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
       }
     }
     else { $scope.initResetSuggestions(); }
+  };
+
+  $scope.calculateReadability = function () {
+
   };
 
   $scope.findClusterKeywords = function (row, col) {
@@ -148,18 +154,34 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   };
 
   $scope.suggestionAnalysis = function () {
-    //$scope.suggestionsLoading = true;
+    $scope.suggestionsLoading = true;
+
     var startRow = $scope.suggestionClickedStart.split('-')[0];
     var startCol = $scope.suggestionClickedStart.split('-')[1];
-    //$scope.suggestionMentionLess = $scope.findClusterKeywords(startRow, startCol);
-    $scope.suggestionMentionLess = $scope.output.keywords[startRow][startCol];
+    var startPosition = $scope.calculatePosition(startRow, startCol);
+    $scope.suggestionMentionLess = $scope.findClusterKeywords(startRow, startCol);
+    //$scope.suggestionMentionLess = $scope.output.keywords[startRow][startCol];
+
     var endRow = $scope.suggestionClickedEnd.split('-')[0];
     var endCol = $scope.suggestionClickedEnd.split('-')[1];
+    var endPosition = $scope.calculatePosition(endRow, endCol);
     $scope.suggestionMentionMore = $scope.findClusterKeywords(endRow, endCol);
-    for (var i = 0; i < $scope.suggestionMentionLess.length; i++) {
-      var index = $scope.suggestionMentionMore.indexOf($scope.suggestionMentionLess[i]);
-      if (index) { $scope.suggestionMentionMore.splice(index, 1); }
-    }
+
+    api.getContextKeywords(startPosition).then(function (lessContext) {
+      api.getContextKeywords(endPosition).then(function (moreContext) {
+        console.log(lessContext, moreContext);
+        // TODO: use cortical not languages
+        $scope.suggestionMentionLessContext = lessContext.data.map(function (i) { return i.term; });
+        $scope.suggestionMentionMoreContext = moreContext.data.map(function (i) { return i.term; });
+      }, function () { swal('Oops...', 'Something went wrong!', 'error'); });
+    }, function () { swal('Oops...', 'Something went wrong!', 'error'); });
+
+  };
+
+  $scope.calculatePosition = function (row, col) {
+    row = parseInt(row);
+    col = parseInt(col);
+    return (row * $scope.heatmapSize) + col;
   };
 
   $scope.openCloseView = function (view) {

@@ -41,10 +41,18 @@
         <div class="loading" ng-if="suggestionsLoading" style="text-align: center;">
           <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
         </div>
+        
+        <h3>Keywords to mention less</h3>
         <div>You should mention below keywords a little less</div>
         <ul><li ng-repeat="less in suggestionMentionLess track by $index">{{ less }}</li></ul>
+        <div>In the context of</div>
+        <ul><li ng-repeat="lessctx in suggestionMentionLessContext track by $index">{{ lessctx }}</li></ul>
+
+        <h3>Keywords to mention more</h3>
         <div>You should mention below keywords a little more</div>
         <ul><li ng-repeat="more in suggestionMentionMore track by $index">{{ more }}</li></ul>
+        <div>In the context of</div>
+        <ul><li ng-repeat="morectx in suggestionMentionMoreContext track by $index">{{ morectx }}</li></ul>
       </div>
     </div>
 

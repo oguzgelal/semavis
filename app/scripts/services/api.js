@@ -10,6 +10,7 @@ angular.module('semavisApp').service('api', function ($rootScope, $http) {
       '99196470-148a-11e7-b22d-93a4ae922ff1'
     ],
     base: 'http://api.cortical.io/rest',
+    langbase: 'http://languages.cortical.io/rest',
     getApiKey: function () {
       return api.keys[Math.floor(Math.random() * api.keys.length)];
     },
@@ -70,6 +71,21 @@ angular.module('semavisApp').service('api', function ($rootScope, $http) {
       }
     });
   };
+
+  api.getContextKeywords = function (position) {
+    return $http({
+      method: 'GET',
+      url: api.langbase + '/expressions/similar_terms_bit',
+      timeout: 180000,
+      headers: api.getHeaders(),
+      params: {
+        'retina_name': 'en_general',
+        'position': position
+      }
+    });
+  };
+
+
 
   return api;
 });
