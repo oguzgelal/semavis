@@ -10,5 +10,39 @@
     <!-- minimize button -->
     <div class="section-button icon-only {{ isMinimized('readability') ? 'active' : '' }}" data-toggle="tooltip" title="{{ isMinimized('readability') ? 'Expand' : 'Minimize' }}" ng-click="minimizeView('readability')"><i class="fa fa-window-minimize" aria-hidden="true"></i></div>
   </div>
-  <div class="mock-box bt0" ng-if="!isMinimized('readability')"></div>
-</div>
+  <div class="keyword-box bt0" ng-if="!isMinimized('readability')">
+
+    <div class="readability-bar">
+      <div class="t1">Easy to Read</div>
+      <div class="t2">Hard to Read</div>
+      <div class="t3">Medium</div>
+      <div class="progress">
+        <div class="progress-bar {{ getProgressBarColor() }}" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ calculateReadability() }}%">
+        </div>
+      </div>
+      <div style="padding-top: 30px;">
+        <p>
+          Readability score indicates how easy your text is to read. A text hard to read 
+          doesn't necessarily mean you have a bad text. But the more readable your text is, 
+          the larger audience it will attract. Depending on your needs, if you are writing your 
+          thesis you could keep this bar close to hard to read, as your intended audience 
+          is most likely to read and understand your text. However if you are writing an article 
+          for the general public to read, you might want to get this score closer to "easy to read". 
+        </p>
+        <p>
+          <b>Here are the simple steps you should take to improve your readability score:</b>
+        </p>
+        <p>
+          <ul>
+            <li>Use shorter sentences.</li>
+            <li>Reduce jargon, acronyms, and “insider” words.</li>
+            <li>Use an active voice.</li>
+            <li>Turn complex points into simple maxims.</li>
+            <li>Stay on point.</li>
+            <li>Use an <a href="http://www.hemingwayapp.com">application</a> that analyses your text in terms of readability.</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+  </div>

@@ -373,4 +373,32 @@ body {
 }
 
 
-
+.readability-bar {
+  padding: 30px;
+  position: relative;
+  .t1 {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: #27ae60;
+    font-weight: bolder;
+  }
+  .t2 {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: #c0392b;
+    font-weight: bolder;
+  }
+  .t3 {
+    top: 30px;
+    width: 100%;
+    text-align: center;
+    color: #e67e22;
+    font-weight: bolder;
+  }
+  .progress {
+    margin: 0;
+    margin-top: 10px;
+  }
+}

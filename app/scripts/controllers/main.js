@@ -120,7 +120,16 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
   };
 
   $scope.calculateReadability = function () {
-
+    if (textstatistics && $scope.input.corpus && $scope.input.corpus.length > 0){
+      return textstatistics('testing').fleschKincaidReadingEase($scope.input.corpus);
+    }
+    return null;
+  };
+  $scope.getProgressBarColor = function(){
+    var readability = $scope.calculateReadability();
+    if (readability < 30){ return 'progress-bar-danger';  }
+    if (readability < 60){ return 'progress-bar-warning'; }
+    return 'progress-bar-success';
   };
 
   $scope.findClusterKeywords = function (row, col) {
@@ -170,7 +179,6 @@ angular.module('semavisApp').controller('MainCtrl', function ($rootScope, $scope
     api.getContextKeywords(startPosition).then(function (lessContext) {
       api.getContextKeywords(endPosition).then(function (moreContext) {
         console.log(lessContext, moreContext);
-        // TODO: use cortical not languages
         $scope.suggestionMentionLessContext = lessContext.data.map(function (i) { return i.term; });
         $scope.suggestionMentionMoreContext = moreContext.data.map(function (i) { return i.term; });
       }, function () { swal('Oops...', 'Something went wrong!', 'error'); });
